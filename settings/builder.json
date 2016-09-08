@@ -1,0 +1,17 @@
+{
+  "excludeScenes": [],
+  "includeAnysdk": false,
+  "includeSdk": [
+    "anysdk"
+  ],
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.GalFighter",
+  "startScene": "df8072fa-39a9-4ee0-9651-c52054c6edc1",
+  "title": "GalFighter",
+  "webOrientation": "auto"
+}
