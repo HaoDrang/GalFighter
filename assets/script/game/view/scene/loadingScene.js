@@ -1,13 +1,10 @@
-/**
- * splash screen
- * 
- */
+
 //@instance
 var gm = require('gameNamingSpace');
 var appConstant = require('appConstant');
 //@class
 var GameCore = require('gameCore');
-//@toolkit
+//@util
 var sceneTransition = require('sceneTransition');
 
 cc.Class({
@@ -85,9 +82,9 @@ cc.Class({
             cc.log('[Transition] Transfer to new scene');
 
             sceneTransition.fadeOut(this.node, 
-                                    function(){
-                                        cc.director.loadScene (this.nextScene);
-                                    }.bind(this));
+                function(){ 
+                    cc.director.loadScene (this.nextScene);
+                }.bind(this));
         }
     }
 });

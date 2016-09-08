@@ -1,13 +1,18 @@
 /**
  * scene transition function assembly
  */
-var gm = require('gameNamingSpace');
+var appConstant = require('appConstant');
 
 var sceneTransition = {
     fadeIn : function(node, callBack){
         var fadeInAction = cc.sequence([
-            cc.fadeIn(gm.appConstant.SCENE_FADE_IN_DURATION),
-            cc.callFunc(callBack)
+            cc.fadeIn(appConstant.SCENE_FADE_IN_DURATION),
+
+            cc.callFunc(function(){
+                if(callBack){
+                    callBack();
+                }
+            })
         ]);
 
         node.runAction(fadeInAction);
@@ -15,10 +20,17 @@ var sceneTransition = {
 
     fadeOut : function(node, callBack){
         var fadeOutAction = cc.sequence([
-            cc.fadeOut(gm.appConstant.SCENE_FADE_OUT_DURATION),
-            cc.callFunc(callBack)
+            cc.fadeOut(appConstant.SCENE_FADE_OUT_DURATION),
+            
+            cc.callFunc(function(){
+                if(callBack){
+                    callBack();
+                }
+            })
         ]);
 
-        node.runAction(callBack);
+        node.runAction(fadeOutAction);
     }
 };
+
+module.exports = sceneTransition;
