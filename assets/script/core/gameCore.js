@@ -1,11 +1,16 @@
-
-cc.Class({
+/**
+ * core of the game
+ * sound and storage goes here
+ */
+var GameCore = cc.Class({
     properties: {
-
+        sound   : Object,
+        storage : Object
     },
 
     initialize: function(){
-
+        this.sound      = new require('sound');
+        this.storage    = new require('storage');
     },
 
     start : function(){
@@ -21,6 +26,8 @@ cc.Class({
     },
 
     exit: function(){
-        
+
     }
 });
+
+module.exports = GameCore;
