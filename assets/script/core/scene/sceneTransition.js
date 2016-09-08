@@ -5,6 +5,9 @@ var appConstant = require('appConstant');
 
 var sceneTransition = {
     fadeIn : function(node, callBack){
+        
+        node.opacity = 0;
+
         var fadeInAction = cc.sequence([
             cc.fadeIn(appConstant.SCENE_FADE_IN_DURATION),
 
