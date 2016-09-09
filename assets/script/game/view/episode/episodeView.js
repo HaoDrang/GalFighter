@@ -18,9 +18,16 @@ cc.Class({
     onLoad: function () {
 
     },
+    /**
+     * @todo
+     */
+    setEpisode: function(key){
 
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
+    },
+    /**
+     * @todo
+     */
+    play: function(index){
 
-    // },
+    }
 });
