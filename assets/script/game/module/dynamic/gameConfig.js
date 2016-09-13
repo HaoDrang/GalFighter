@@ -1,5 +1,5 @@
 var GameConfig = {
-    EPISODE_PATH:"episode"
+    CHAPTER_PATH:"chapter"
 };
 
 function deepFreeze(obj) {

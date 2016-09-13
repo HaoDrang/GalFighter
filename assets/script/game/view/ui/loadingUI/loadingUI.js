@@ -1,4 +1,4 @@
-// var EpisodeLoader = require('episodeLoader');
+// var ChapterLoader = require('chapterLoader');
 
 cc.Class({
     extends: cc.Component,

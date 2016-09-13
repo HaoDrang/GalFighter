@@ -1,8 +1,8 @@
 /**
- * load a episode
+ * load a chapter
  * TODO
  */
-var EpisodeLoader = cc.Class({
+var ChapterLoader = cc.Class({
     properties:{
         _key:cc.String,
         _callback:Object
@@ -19,4 +19,4 @@ var EpisodeLoader = cc.Class({
     },
 });
 
-module.exports = EpisodeLoader;
+module.exports = ChapterLoader;

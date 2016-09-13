@@ -1,14 +1,14 @@
 /**
- * Episode View
+ * chapter View
  */
-var EpisodeData = require('episodeData');
+var ChapterData = require('chapterData');
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
         _frameArray:[],
-        _episodeData:Object,
+        _chapterData:Object,
     },
 
     // use this for initialization
@@ -18,8 +18,8 @@ cc.Class({
     /**
      * @todo
      */
-    setEpisode: function(key){
-        this._episodeData = EpisodeData.getEpisodeData(key);
+    setchapter: function(key){
+        this._chapterData = ChapterData.getChapterData(key);
     },
     /**
      * @todo
