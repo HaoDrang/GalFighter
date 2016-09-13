@@ -1,5 +1,6 @@
 var GameConfig = {
     CHAPTER_PATH:"chapter"
+
 };
 
 function deepFreeze(obj) {

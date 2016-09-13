@@ -156,7 +156,11 @@
       "__id__": 1
     },
     "_enabled": true,
+    "framePrefab": {
+      "__uuid__": "891f65c8-caf8-4c40-9073-5e01845e399f"
+    },
     "_frameArray": [],
+    "_framePool": null,
     "_chapterData": null
   },
   {

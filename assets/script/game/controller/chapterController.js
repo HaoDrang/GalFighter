@@ -1,5 +1,7 @@
 
-var chapterController = cc.Class({
+var ChapterController = cc.Class({
+    name:'ChapterController',
+
     properties:()=>({
         _view:require('chapterView'),
         _module:require('chapterData'),
@@ -19,11 +21,13 @@ var chapterController = cc.Class({
      * initialize chapter controller
      * @param [chapterNode] {cc.Node}  [chapterData] {chapterData}
      */
-    initialize: function(chapterNode, chapterDataHandler){
+    initialize: function(chapterDataHandler, chapterNode){
+
+        this._module = chapterDataHandler;
 
         this._view = chapterNode.getComponent('chapterView');
         
-        this._module = chapterDataHandler;
+        this._view.initialize(this._module);
     },
 
     /**
@@ -40,12 +44,12 @@ var chapterController = cc.Class({
     },
 
     /**
-     * call back at target index
-     * @param [index]{number}  [callback]{function}
+     * call back at target frame, identified by id
+     * @param [id]{number}  [callback]{function}
      * @return {chapterConroller}
      * @todo
      */
-    setCallback: function(index, callback){
+    setCallback: function(id, callback){
 
         return this;
     },
@@ -63,4 +67,4 @@ var chapterController = cc.Class({
     }
 });
 
-module.exports = chapterController;
+module.exports = ChapterController;

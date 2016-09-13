@@ -1,6 +1,6 @@
 /**
  * load a chapter
- * TODO
+ * @todo
  */
 var ChapterLoader = cc.Class({
     properties:{
@@ -16,7 +16,7 @@ var ChapterLoader = cc.Class({
         this._callback = callback;
 
         
-    },
+    }
 });
 
 module.exports = ChapterLoader;

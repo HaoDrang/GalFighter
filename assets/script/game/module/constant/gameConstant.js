@@ -1,26 +1,25 @@
-cc.Class({
-    extends: cc.Component,
+var GameConstant = {
+    MAX_FRAME_POOL_VALUME: 10
+};
 
-    properties: {
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
-    },
+function deepFreeze(obj) {
 
-    // use this for initialization
-    onLoad: function () {
+  // Retrieve the property names defined on obj
+  var propNames = Object.getOwnPropertyNames(obj);
 
-    },
+  // Freeze properties before freezing self
+  propNames.forEach(function(name) {
+    var prop = obj[name];
 
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
+    // Freeze prop if it is an object
+    if (typeof prop == 'object' && prop !== null)
+      deepFreeze(prop);
+  });
 
-    // },
-});
+  // Freeze self (no-op if already frozen)
+  return Object.freeze(obj);
+};
+
+deepFreeze(GameConstant);
+
+module.exports = GameConstant;

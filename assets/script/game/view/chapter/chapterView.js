@@ -1,25 +1,48 @@
+var GameConstant = require('gameConstant');
+
 /**
  * chapter View
  */
-var ChapterData = require('chapterData');
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
+        //public
+        framePrefab:cc.Prefab,
+        //private
         _frameArray:[],
+        _framePool:cc.NodePool,
         _chapterData:Object,
     },
 
-    // use this for initialization
-    onLoad: function () {
+    /**
+     * init chapter view with data
+     * @param [moduleHandler]{ChapterData}
+     */
+    initialize: function(moduleHandler){
+        this._chapterData = moduleHandler;
+
+        this._initFramePool();
 
     },
+    
+    _initFramePool: function(){
+        
+        this._framePool = new cc.NodePool('frameView');
+
+        for(var i = GameConstant.MAX_FRAME_POOL_VALUME; i--;){
+            
+            this._framePool.put(cc.instantiate(this.framePrefab));
+        
+        }
+    },
+
     /**
      * @todo
      */
-    setchapter: function(key){
-        this._chapterData = ChapterData.getChapterData(key);
+    setChapter: function(key){
+
     },
     /**
      * @todo

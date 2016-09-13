@@ -25,6 +25,6 @@ cc.Class({
         var chapterCtrl = new ChapterController();
         chapterCtrl.initialize(this.chapter, chapterUI);
 
-        chapterCtrl.play(1);
+        chapterCtrl.play();
     } 
 });
