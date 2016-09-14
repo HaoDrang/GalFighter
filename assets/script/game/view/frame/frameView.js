@@ -1,3 +1,5 @@
+var FKEY = require('gameString');
+/**Frame key for short */
 cc.Class({
     extends: cc.Component,
 
@@ -25,34 +27,35 @@ cc.Class({
     },
 
     /**
-     * set frame data by dom from xml
+     * set frame data by dom generated from xml
      * @param [frame]{Document}
-     * @param [part]{Document}
+     */
+    setFrameDataByDom: function(frame){
+        this.setAction(frame.getElementById(FKEY.ACTIONS));
+        this.setLines(frame.getElementById(FKEY.LINES));
+    },
+
+    /**
+     * set actions at this frame
+     * @param [actions]{Document}
      * @todo
      */
-    setFrameData: function(frame, part){
-
-        this.setActor(frame.getElementById('Actors'));
-        this.setConversation(frame.getElementById('Conversation'));
-        this.setBackground(part.getElementById('Background'));
+    setAction: function(actions){
+        // check actor
+        // be aware of async issues
     },
 
     /**
-     * @param [actors]{json}
+     * @param [conversations]{Document}
+     * @todo
      */
-    setActor: function(actors){
-
+    setLines: function(lines){
+        cc.log(lines);
     },
 
     /**
-     * @param [conversations]{json}
-     */
-    setConversation: function(conversations){
-
-    },
-
-    /**
-     * @param [backgrounds]{json}
+     * @param [backgrounds]{Document}
+     * @todo
      */
     setBackground: function(backgrounds){
 

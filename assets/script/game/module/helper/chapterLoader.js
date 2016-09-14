@@ -14,8 +14,6 @@ var ChapterLoader = cc.Class({
 
     begin: function(callback){
         this._callback = callback;
-
-        
     }
 });
 

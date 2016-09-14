@@ -1,12 +1,25 @@
 <?xml  version="1.0" encoding="utf-8"?>
-<Charpter>
-	<Actors>
-		<Actor>TestActor</Actor>
-	</Actors>
+<Charpter id = 'chapter-1'>
+
 	<Parts>
-		<Part id = "1">
+		<Part id = "chapter-1-part-1">
 			<Frames>
-				<Frame id = "1-1">Hello!</Frame>
+				<Frame id = "1-1">
+					<Actions>
+					<!--> Examples of actions <-->
+						<Action id = 'test-action-1'>
+							<Actor>TestActor</Actor>
+							<Type>Animate</Type>
+							<Animate>shrug</Animate>
+						</Action>
+						<Action id = 'test-action-2'>
+							<Actor>TestActor</Actor>
+							<Type>Shake</Type>
+							<Shake range = '10' duration = '0.4'></Shake>
+						</Action>
+					</Actions>	
+					<Lines>Hello!</Lines>
+				</Frame>
 				<Frame id = "1-2">Nice to meet you!</Frame>
 				<Frame id = "1-3">Where are u from?</Frame>
 			</Frames>

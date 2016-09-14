@@ -1,3 +1,6 @@
+var XMLKEY = require('gameString');
+var 
+
 var ChapterData = cc.Class({
     // extends: cc.Component,
 
@@ -17,7 +20,8 @@ var ChapterData = cc.Class({
      */
     initialize: function(xmlString){
         var parser = new DOMParser();
-        this._chapterData = parser.parseFromString(xmlString, "text/xml");
+        /**@todo "turn target to object for easy handling" */
+        this._chapterData = this.convert(parser.parseFromString(xmlString, "text/xml"));
     },
 
     /**
@@ -26,6 +30,17 @@ var ChapterData = cc.Class({
      */
     getChapterData: function(){
         return _chapterData;
+    },
+
+    /**
+     * get frame Document
+     * @return {Document}
+     * @todo
+     */
+    getFrameDom: function(index){
+
+        
+        return ;
     }
 });
 

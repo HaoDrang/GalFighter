@@ -13,7 +13,7 @@ cc.Class({
         //private
         _frameArray:[],
         _framePool:cc.NodePool,
-        _chapterData:Object,
+        _chapterDataHandler:Object,
     },
 
     /**
@@ -21,7 +21,7 @@ cc.Class({
      * @param [moduleHandler]{ChapterData}
      */
     initialize: function(moduleHandler){
-        this._chapterData = moduleHandler;
+        this._chapterDataHandler = moduleHandler;
 
         this._initFramePool();
 
@@ -48,6 +48,8 @@ cc.Class({
      * @todo
      */
     play: function(index){
-
+        var fm = this._framePool.get();
+        this.node.addChild(fm);
+        fm.setFrameDataByDom(this._chapterDataHandler.getFrameDom(0));
     }
 });
