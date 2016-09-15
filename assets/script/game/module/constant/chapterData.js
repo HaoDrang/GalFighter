@@ -1,5 +1,4 @@
 var XMLKEY = require('gameString');
-var 
 
 var ChapterData = cc.Class({
     // extends: cc.Component,
