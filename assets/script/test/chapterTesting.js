@@ -1,5 +1,5 @@
 var ChapterController = require('chapterController');
-var chapterData = require('chapterData');
+var ChapterData = require('chapterData');
 var GCFG = require('gameConfig');
 cc.Class({
     extends: cc.Component,
@@ -16,7 +16,7 @@ cc.Class({
 
     loadDataDone: function(err, assets){
 
-        this.chapter = new chapterData();
+        this.chapter = new ChapterData();
         this.chapter.initialize(assets[0]);
 
         var chapterUI = cc.instantiate(this.chapterTemplate);

@@ -1,8 +1,8 @@
 <?xml  version="1.0" encoding="utf-8"?>
-<Charpter id = 'chapter-1'>
+<Chapter id = 'Chapter-1'>
 
 	<Parts>
-		<Part id = "chapter-1-part-1">
+		<Part id = "Chapter-1-Part-1">
 			<Frames>
 				<Frame id = "1-1">
 					<Actions>
@@ -24,5 +24,7 @@
 				<Frame id = "1-3">Where are u from?</Frame>
 			</Frames>
 		</Part>
+		<Part id = "Chapter-1-Part-2">
+		</Part>
 	</Parts>
-</Charpter>
+</Chapter>
