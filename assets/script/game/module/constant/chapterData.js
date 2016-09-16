@@ -22,7 +22,7 @@ var ChapterData = cc.Class({
      */
     initialize: function(xmlString){
         var parser = new DOMParser();
-        this._chapterData.deserialize(parser.parseFromString(xmlString, "application/xml"));
+        this._chapterData.deserialize(parser.parseFromString(xmlString, "text/xml"));
     },
 
     /**

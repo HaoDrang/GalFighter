@@ -9,6 +9,7 @@ var GameString = {
                         FRAME:'Frame',
                             ACTIONS:'Actions',
                                 ACTOR:'Actor',
+                                TYPE:'Type',
                                     CAMERA      : 'Camera',
                                     BACKGROUND  : 'Background',
                                     DIALOG_BOX  : 'DialogBox',

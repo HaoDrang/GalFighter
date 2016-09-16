@@ -10,8 +10,19 @@ module.exports = {
      * @return {string}
      */
     getFirstElementByName : function(xmlDom, tagName){
-        var nodelist = xmlDom.getElementsByTagName(tagName);
-        return nodelist.item(0);  
+        if(tagName === undefined){
+            cc.log("???")
+        }
+        try{
+            var nodelist = xmlDom.getElementsByTagName(tagName);
+            return nodelist.item(0); 
+        }
+        catch(err){
+            cc.log(err);
+            cc.log(tagName);
+            return null;
+        }
+ 
     },
     /**
      * read properties from dom , add to target object
@@ -34,6 +45,17 @@ module.exports = {
         }
 
         return target;
+    },
+    /**
+     * replace [] with <>
+     * @param [source]{string}
+     * @return {string}
+     */
+    convertLines: function(source){
+        var ret = source.replace(/\[/g, '<');
+        ret = ret.replace(/\]/g, '>');
+
+        return ret;
     }
 
 };

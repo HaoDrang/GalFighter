@@ -1,6 +1,6 @@
 var gameDataUtil = require('gameDataUtil');
 var GameString = require('gameString');
-
+var ActionStruct = require('actionStruct');
 
 // var aa = new XMLDocument();
 // var nd = new NodeList();
@@ -12,14 +12,25 @@ var ChapterStruct = cc.Class({
     name:'ChapterStruct',
 
     properties: {
+        //private
+        _attrs:Object,
         _parts:Object,
-        _chapterAttrs:Object,
-        _index:cc.Integer
+        _index:cc.Integer,
+        //public
+        gId:{
+            /**@return {string} */
+            get: function(){
+                if(this._attrs['id']){
+                    return this._attrs.id;
+                }
+                return null;
+            }
+        }
     },
 
     ctor: function(){
         this._parts = {};
-        this._chapterAttrs = {};
+        this._attrs = {};
         this._index = 0;
     },
     /**
@@ -34,23 +45,32 @@ var ChapterStruct = cc.Class({
             return null;
         }
 
-        gameDataUtil.addPropertiesFromDom(this._chapterAttrs, chapterDom);
-        cc.log(this._chapterAttrs);
+        gameDataUtil.addPropertiesFromDom(this._attrs, chapterDom);
         
         var partsDom = gameDataUtil.getFirstElementByName(chapterDom, GameString.PARTS);
+
+        if(!partsDom){
+            return null;
+        }
 
         // serialize parts
         var partNodeList = partsDom.getElementsByTagName(GameString.PART);
         for(var i = 0; i < partNodeList.length; i++){
             
             var partDom = partNodeList.item(i);
+
+            if(!partDom){
+                return;
+            }
             
             var part = new PartStruct();
             
             part.deserialize(partDom);
 
-            this._parts[part.id] = part;
+            this._parts[part.gId] = part;
         }
+
+        return this;
     },
     /**
      * generate XMLDocument
@@ -66,7 +86,23 @@ var ChapterStruct = cc.Class({
  */
 var PartStruct = cc.Class({
     properties: {
+        _attrs:Object,
+        _frames:[],
+        //public
+        gId:{
+            /**@return {string} */
+            get: function(){
+                if(this._attrs['id']){
+                    return this._attrs.id;
+                }
+                return null;
+            }
+        }
+    },
 
+    ctor:function(){
+        this._frames = [];
+        this._attrs = {};
     },
     /**
      * analyse data from XMLDocument
@@ -74,6 +110,34 @@ var PartStruct = cc.Class({
      */
     deserialize : function(xdom){
 
+        gameDataUtil.addPropertiesFromDom(this._attrs, xdom);
+
+        var framesDom = gameDataUtil.getFirstElementByName(xdom, GameString.FRAMES);
+
+        if(!framesDom){
+            return null;
+        }
+
+        var framesNodeList = framesDom.getElementsByTagName(GameString.FRAME);
+
+        if(!framesNodeList){
+            return null;
+        }
+
+        for(var i = 0; i < framesNodeList.length; i++){
+
+            var frameDom = framesNodeList.item(i);
+
+            if(!frameDom){
+                continue;
+            }
+
+            var frame = new FrameStruct();
+
+            frame.deserialize(frameDom);
+
+            this._frames.push(frame);
+        }
     },
     /**
      * generate XMLDocument
@@ -89,7 +153,25 @@ var PartStruct = cc.Class({
  */
 var FrameStruct = cc.Class({
     properties: {
+        _attrs : Object,
+        _actions : Array,
+        _lines : Object,
+        //public
+        gId:{
+            /**@return {string} */
+            get: function(){
+                if(this._attrs['id']){
+                    return this._attrs.id;
+                }
+                return null;
+            }
+        }
+    },
 
+    ctor: function(){
+        this._attrs = {};
+        this._lines = {};
+        this._actions = [];
     },
     /**
      * analyse data from XMLDocument
@@ -97,6 +179,40 @@ var FrameStruct = cc.Class({
      */
     deserialize : function(xdom){
 
+        gameDataUtil.addPropertiesFromDom(this._attrs, xdom);
+
+        var actionsDom = gameDataUtil.getFirstElementByName(xdom, GameString.ACTIONS);
+
+        if(!actionsDom){
+            return;
+        }
+
+        var actionsNodeList = actionsDom.getElementsByTagName(GameString.ACTION);
+
+        if(!actionsNodeList){
+            return;
+        }
+
+        for(var i = 0; i < actionsNodeList.length; i++){
+
+            var actionDom = actionsNodeList.item(i);
+
+            if(!actionDom){
+                continue;
+            }
+
+            var action = new ActionStruct();
+
+            action.deserialize(actionDom);
+
+            this._actions.push(action);
+        }
+
+        var linesDom = gameDataUtil.getFirstElementByName(xdom, GameString.LINES);
+        
+        this._lines = new LinesStruct();
+
+        this._lines.deserialize(linesDom);
     },
     /**
      * generate XMLDocument
@@ -107,42 +223,30 @@ var FrameStruct = cc.Class({
     }
 });
 
-/**
- * @todo
- */
-var ActionStruct = cc.Class({
-    properties: {
-
-    },
-    /**
-     * analyse data from XMLDocument
-     * @param [xdom]{XMLDocument}
-     */
-    deserialize : function(xdom){
-
-    },
-    /**
-     * generate XMLDocument
-     * @return {XMLDocument}
-     */
-    serialize: function(){
-        return null;
-    }
-});
 
 /**
  * @todo
  */
 var LinesStruct = cc.Class({
     properties: {
+        _attrs : Object,
+        _content : cc.String
+    },
 
+    ctor:function(){
+        this._attrs = {};
+        this._content = "";
     },
     /**
      * analyse data from XMLDocument
      * @param [xdom]{XMLDocument}
      */
     deserialize : function(xdom){
+        gameDataUtil.addPropertiesFromDom(this._attrs, xdom);
 
+        this._content = gameDataUtil.convertLines(xdom.textContent);
+
+        cc.log(this._content);
     },
     /**
      * generate xml string
@@ -152,8 +256,6 @@ var LinesStruct = cc.Class({
         return null;
     }
 });
-
-
 
 module.exports = {
     ChapterStruct : ChapterStruct,
