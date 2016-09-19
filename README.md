@@ -4,6 +4,8 @@ PROGRESSING
 
 TODO:
 
+BUTT IN: add a DOM parser
+
 1. xml viewer
   1). show objects
   2). add pool

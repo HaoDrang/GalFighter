@@ -22,8 +22,8 @@ var ChapterData = cc.Class({
      * @param [xmlString]{string}
      */
     initialize: function(xmlString){
-        var parser = new XML();
-        this._chapterData.deserialize(parser.xml_str2json(xmlString));
+        var parser = new DOMParser();
+        this._chapterData.deserialize(parser.parseFromString(xmlString));
     },
 
     /**

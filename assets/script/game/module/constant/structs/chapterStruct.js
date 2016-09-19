@@ -36,41 +36,38 @@ var ChapterStruct = cc.Class({
      */
     deserialize : function(xdom){
 
-        cc.log(xdom);
-        return;
+        var chapterDom = gameDataUtil.getFirstElementByName(xdom, GameString.CHAPTER);
+        if(!chapterDom){
+            cc.warn('[Null] ' + GameString.CHAPTER + ' NOT EXIST in xml.')
+            return null;
+        }
+
+        gameDataUtil.addPropertiesFromDom(this._attrs, chapterDom);
         
-        // var chapterDom = gameDataUtil.getFirstElementByName(xdom, GameString.CHAPTER);
-        // if(!chapterDom){
-        //     cc.warn('[Null] ' + GameString.CHAPTER + ' NOT EXIST in xml.')
-        //     return null;
-        // }
+        var partsDom = gameDataUtil.getFirstElementByName(chapterDom, GameString.PARTS);
 
-        // gameDataUtil.addPropertiesFromDom(this._attrs, chapterDom);
-        
-        // var partsDom = gameDataUtil.getFirstElementByName(chapterDom, GameString.PARTS);
+        if(!partsDom){
+            return null;
+        }
 
-        // if(!partsDom){
-        //     return null;
-        // }
-
-        // // serialize parts
-        // var partNodeList = partsDom.getElementsByTagName(GameString.PART);
-        // for(var i = 0; i < partNodeList.length; i++){
+        // serialize parts
+        var partNodeList = partsDom.getElementsByTagName(GameString.PART);
+        for(var i = 0; i < partNodeList.length; i++){
             
-        //     var partDom = partNodeList.item(i);
+            var partDom = partNodeList.item(i);
 
-        //     if(!partDom){
-        //         return;
-        //     }
+            if(!partDom){
+                return;
+            }
             
-        //     var part = new PartStruct();
+            var part = new PartStruct();
             
-        //     part.deserialize(partDom);
+            part.deserialize(partDom);
 
-        //     this._parts[part.gId] = part;
-        // }
+            this._parts[part.gId] = part;
+        }
 
-        // return this;
+        return this;
     },
     /**
      * generate XMLDocument
