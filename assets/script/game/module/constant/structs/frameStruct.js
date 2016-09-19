@@ -20,6 +20,28 @@ var FrameStruct = cc.Class({
                 }
                 return null;
             }
+        },
+
+        actions:{
+            /**@return {Array} */
+            get:function(){
+                if(!this._actions){
+                    return null;
+                }
+
+                return this._actions;
+            }
+        },
+
+        lines: {
+            /**@return {Object} */
+            get:function(){
+                if(!this._lines){
+                    return null;
+                }
+
+                return this._lines;
+            }
         }
     },
 

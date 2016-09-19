@@ -67,6 +67,19 @@ var PartStruct = cc.Class({
      */
     serialize: function(){
         return null;
+    },
+
+    /**
+     * @param [index]{number}
+     * @return {Object}
+     */
+    getFrameByIndex:function(index){
+        if(index < 1 || index > this._frames.length){
+            cc.err('[ERROR] Index out of range: ' + index);
+            return null;
+        }
+
+        return this._frames[index-1];
     }
 });
 

@@ -1,6 +1,6 @@
 var gameDataUtil = require('gameDataUtil');
 var GameString = require('gameString');
-var PartStruct = require('partstruct');
+var PartStruct = require('partStruct');
 
 /**
  * Data struct of Chapter
@@ -35,39 +35,42 @@ var ChapterStruct = cc.Class({
      * @param [xdom]{XMLDocument}
      */
     deserialize : function(xdom){
+
+        cc.log(xdom);
+        return;
         
-        var chapterDom = gameDataUtil.getFirstElementByName(xdom, GameString.CHAPTER);
-        if(!chapterDom){
-            cc.warn('[Null] ' + GameString.CHAPTER + ' NOT EXIST in xml.')
-            return null;
-        }
+        // var chapterDom = gameDataUtil.getFirstElementByName(xdom, GameString.CHAPTER);
+        // if(!chapterDom){
+        //     cc.warn('[Null] ' + GameString.CHAPTER + ' NOT EXIST in xml.')
+        //     return null;
+        // }
 
-        gameDataUtil.addPropertiesFromDom(this._attrs, chapterDom);
+        // gameDataUtil.addPropertiesFromDom(this._attrs, chapterDom);
         
-        var partsDom = gameDataUtil.getFirstElementByName(chapterDom, GameString.PARTS);
+        // var partsDom = gameDataUtil.getFirstElementByName(chapterDom, GameString.PARTS);
 
-        if(!partsDom){
-            return null;
-        }
+        // if(!partsDom){
+        //     return null;
+        // }
 
-        // serialize parts
-        var partNodeList = partsDom.getElementsByTagName(GameString.PART);
-        for(var i = 0; i < partNodeList.length; i++){
+        // // serialize parts
+        // var partNodeList = partsDom.getElementsByTagName(GameString.PART);
+        // for(var i = 0; i < partNodeList.length; i++){
             
-            var partDom = partNodeList.item(i);
+        //     var partDom = partNodeList.item(i);
 
-            if(!partDom){
-                return;
-            }
+        //     if(!partDom){
+        //         return;
+        //     }
             
-            var part = new PartStruct();
+        //     var part = new PartStruct();
             
-            part.deserialize(partDom);
+        //     part.deserialize(partDom);
 
-            this._parts[part.gId] = part;
-        }
+        //     this._parts[part.gId] = part;
+        // }
 
-        return this;
+        // return this;
     },
     /**
      * generate XMLDocument
@@ -75,6 +78,15 @@ var ChapterStruct = cc.Class({
      */
     serialize: function(){
         return null;
+    },
+    /**
+     * get part of the chapter by index
+     * @param [index]{number}
+     * @return {Object} return a struct of part
+     */
+    getPartByIndex: function(index){
+        var key = GameString.PART + '-' + index;
+        return this._parts[key];
     }
 });
 

@@ -1,15 +1,14 @@
-var FKEY = require('gameString');
+var GameString = require('gameString');
 /**Frame key for short */
 cc.Class({
     extends: cc.Component,
 
-    properties: {
+    properties:()=>({
 
         actorRoot:cc.Node,
-        conversationRoot:cc.Node,
-
+        linesView:require('linesView'),
         background:cc.Sprite
-    },
+    }),
 
     /**
      * clean node
@@ -18,6 +17,7 @@ cc.Class({
     unuse: function(){
         
     },
+
     /**
      * prepare node
      * @todo
@@ -30,9 +30,9 @@ cc.Class({
      * set frame data by dom generated from xml
      * @param [frame]{Document}
      */
-    setFrameDataByDom: function(frame){
-        this.setAction(frame.getElementById(FKEY.ACTIONS));
-        this.setLines(frame.getElementById(FKEY.LINES));
+    setFrameData: function(frame){
+        this.setAction(frame.actions);
+        this.setLines(frame.lines);
     },
 
     /**
@@ -46,11 +46,12 @@ cc.Class({
     },
 
     /**
-     * @param [conversations]{Document}
-     * @todo
+     * @param [lines]{LinesStruct}
      */
     setLines: function(lines){
-        cc.log(lines);
+        if(this.linesView){
+            this.linesView.setLines(lines);
+        }
     },
 
     /**

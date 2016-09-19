@@ -1,4 +1,5 @@
 var Structs = require('chapterStruct');
+var XML = require('xml2json');
 
 var ChapterData = cc.Class({
 
@@ -21,8 +22,8 @@ var ChapterData = cc.Class({
      * @param [xmlString]{string}
      */
     initialize: function(xmlString){
-        var parser = new DOMParser();
-        this._chapterData.deserialize(parser.parseFromString(xmlString, "text/xml"));
+        var parser = new XML();
+        this._chapterData.deserialize(parser.xml_str2json(xmlString));
     },
 
     /**
@@ -34,14 +35,17 @@ var ChapterData = cc.Class({
     },
 
     /**
-     * get frame Document
-     * @return {Document}
-     * @todo
+     * get frame data by key
+     * @param [partIndex]{number}
+     * @param [frameIndex]{number}
+     * @return {Object}
      */
-    getFrameDom: function(index){
+    getFrameDataByIndex: function(partIndex, frameIndex){
+        if(!this._chapterData) return null;
 
-        
-        return ;
+        var part = this._chapterData.getPartByIndex(partIndex);
+
+        return part.getFrameByIndex(frameIndex);
     }
 });
 

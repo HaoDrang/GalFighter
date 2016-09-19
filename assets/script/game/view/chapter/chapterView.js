@@ -50,6 +50,9 @@ cc.Class({
     play: function(index){
         var fm = this._framePool.get();
         this.node.addChild(fm);
+        var fms = fm.getComponent('frameView');
+        fms.setFrameData(this._chapterDataHandler.getFrameDataByIndex(1, 1));
+        //fms.show();
         // fm.setFrameDataByDom(this._chapterDataHandler.getFrameDom(0));
     }
 });

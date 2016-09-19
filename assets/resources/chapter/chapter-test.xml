@@ -2,29 +2,29 @@
 <Chapter id = 'Chapter-1'>
 
 	<Parts>
-		<Part id = "Chapter-1-Part-1">
+		<Part id = "Part-1">
 			<Frames>
-				<Frame id = "1-1">
+				<Frame id = "Frame-1">
 					<Actions>
 					<!--> Examples of actions <-->
-						<Action id = 'test-action-1'>
+						<Action id = 'Action-1'>
 							<Actor>TestActor1</Actor>
 							<Type>Animate</Type>
 							<Animate>shrug</Animate>
 						</Action>
-						<Action id = 'test-action-2'>
+						<Action id = 'Action-2'>
 							<Actor>TestActor2</Actor>
 							<Type>Shake</Type>
 							<Shake range = '10' duration = '0.4'></Shake>
 						</Action>
 					</Actions>	
-					<Lines>[color=green][size=30]I'm green[/size][/color]</Lines>
+					<Lines>[color=green][size=30]I'm green and 测试文字[/size][/color]</Lines>
 				</Frame>
 				<Frame id = "1-2">Nice to meet you!</Frame>
 				<Frame id = "1-3">Where are u from?</Frame>
 			</Frames>
 		</Part>
-		<Part id = "Chapter-1-Part-2">
+		<Part id = "Part-2">
 		</Part>
 	</Parts>
 </Chapter>
