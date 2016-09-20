@@ -11,11 +11,15 @@ module.exports = {
      */
     getFirstElementByName : function(xmlDom, tagName){
         if(tagName === undefined){
-            cc.log("???")
+            cc.error('[ERROR] tagName not defined.');
         }
         try{
             var nodelist = xmlDom.getElementsByTagName(tagName);
-            return nodelist.item(0); 
+            
+            if(nodelist.length > 0){
+                return nodelist[0]; 
+            }
+            return null;
         }
         catch(err){
             cc.log(err);
@@ -34,7 +38,7 @@ module.exports = {
 
         var attrs = xmlDom.attributes;
         for(var i = 0; i < attrs.length; i++){
-            var att = attrs.item(i);
+            var att = attrs[i];
 
             if(target[att.name]){
                 cc.warn('[XML] deserialize error, attributes conflicts:'+

@@ -1,5 +1,5 @@
-var Structs = require('chapterStruct');
-var XML = require('xml2json');
+var ChapterStruct = require('chapterStruct');
+var TPDomParser = require('domParser');
 
 var ChapterData = cc.Class({
 
@@ -8,13 +8,13 @@ var ChapterData = cc.Class({
     properties: {
         _chapterData : {
             default:null,
-            type:Structs.ChapterStruct,
+            type:ChapterStruct,
             visible:false
         }
     },
 
     ctor: function(){
-        this._chapterData = new Structs.ChapterStruct();
+        this._chapterData = new ChapterStruct();
     },
 
     /**
@@ -22,8 +22,9 @@ var ChapterData = cc.Class({
      * @param [xmlString]{string}
      */
     initialize: function(xmlString){
-        var parser = new DOMParser();
-        this._chapterData.deserialize(parser.parseFromString(xmlString));
+        var parser = new TPDomParser();
+        var dom = parser.parseFromString(xmlString);
+        this._chapterData.deserialize(dom);
     },
 
     /**

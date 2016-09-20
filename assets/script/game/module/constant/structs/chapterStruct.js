@@ -54,7 +54,7 @@ var ChapterStruct = cc.Class({
         var partNodeList = partsDom.getElementsByTagName(GameString.PART);
         for(var i = 0; i < partNodeList.length; i++){
             
-            var partDom = partNodeList.item(i);
+            var partDom = partNodeList[i];
 
             if(!partDom){
                 return;
@@ -87,6 +87,4 @@ var ChapterStruct = cc.Class({
     }
 });
 
-module.exports = {
-    ChapterStruct : ChapterStruct,
-};
+module.exports = ChapterStruct;

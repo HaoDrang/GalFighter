@@ -48,7 +48,7 @@ var PartStruct = cc.Class({
 
         for(var i = 0; i < framesNodeList.length; i++){
 
-            var frameDom = framesNodeList.item(i);
+            var frameDom = framesNodeList[i];
 
             if(!frameDom){
                 continue;

@@ -72,7 +72,7 @@ var FrameStruct = cc.Class({
 
         for(var i = 0; i < actionsNodeList.length; i++){
 
-            var actionDom = actionsNodeList.item(i);
+            var actionDom = actionsNodeList[i];
 
             if(!actionDom){
                 continue;
