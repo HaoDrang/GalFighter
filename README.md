@@ -4,16 +4,14 @@ PROGRESSING
 
 TODO:
 
-BUTT IN: add a DOM parser
+[Show Scene]
+1. Show Lines [DONE]
+2. Show Actor
+3. Rich Text
+4. Add Effect
+5. Fast Playing Mode
+6. Text Animation
+7. Choice System
+8. Story Progress
+9. Save/Load
 
-1. xml viewer
-  1). show objects
-  2). add pool
-2. xml2object
-  1). add property getters
-3. xml controller
-  1). add data map, for looking up target datas
-4. add resources for demo
-5. demo
-6. simplify design and work flow
-7. storm some new feature for main game play
