@@ -8,62 +8,53 @@ var FrameStruct = require('frameStruct');
  */
 var PartStruct = cc.Class({
     properties: {
-        _attrs:Object,
+        _id:cc.String,
         _frames:[],
         //public
         gId:{
             /**@return {string} */
             get: function(){
-                if(this._attrs['id']){
-                    return this._attrs.id;
-                }
-                return null;
+                return this._id;
             }
         }
     },
 
     ctor:function(){
+        this._id = "";
         this._frames = [];
-        this._attrs = {};
     },
     /**
-     * analyse data from XMLDocument
-     * @param [xdom]{XMLDocument}
+     * analyse data from Object
+     * @param [jsonObj]{Object}
      */
-    deserialize : function(xdom){
+    deserialize : function(jsonObj){
 
-        gameDataUtil.addPropertiesFromDom(this._attrs, xdom);
+        this._id = jsonObj.id;
 
-        var framesDom = gameDataUtil.getFirstElementByName(xdom, GameString.FRAMES);
+        var framesJson = jsonObj[GameString.FRAMES];
 
-        if(!framesDom){
+        if(!framesJson){
             return null;
         }
 
-        var framesNodeList = framesDom.getElementsByTagName(GameString.FRAME);
+        for(var i = 0; i < framesJson.length; i++){
 
-        if(!framesNodeList){
-            return null;
-        }
+            var frameJson = framesJson[i];
 
-        for(var i = 0; i < framesNodeList.length; i++){
-
-            var frameDom = framesNodeList[i];
-
-            if(!frameDom){
+            if(!frameJson){
                 continue;
             }
 
             var frame = new FrameStruct();
 
-            frame.deserialize(frameDom);
+            frame.deserialize(frameJson);
 
             this._frames.push(frame);
         }
     },
     /**
-     * generate XMLDocument
-     * @return {XMLDocument}
+     * generate Object
+     * @return {Object}
      */
     serialize: function(){
         return null;

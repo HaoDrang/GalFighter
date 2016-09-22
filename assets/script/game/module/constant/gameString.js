@@ -2,25 +2,29 @@ var util = require('constantUtil');
 
 var GameString = {
 
-      CHAPTER:'Chapter',
-            PARTS:'Parts',
-                PART:'Part',
-                    FRAMES:'Frames',
-                        FRAME:'Frame',
-                            ACTIONS:'Actions',
-                                ACTOR:'Actor',
-                                TYPE:'Type',
-                                    CAMERA      : 'Camera',
-                                    BACKGROUND  : 'Background',
-                                    DIALOG_BOX  : 'DialogBox',
-                                ACTION:'Action',
-                                    SHAKE:'Shake',
-                                    ZOOM :'Zoom',
-                                    ANIMATE:'Animate',
-                                    JUMP:'Jump',
-                                    CHANGE:'Change',
-                                    POSTURE:'Posture',
-                            LINES:'Lines'
+      CHAPTER:'chapter',
+            ID:'id',
+            PARTS:'parts',
+                PART:'part',
+                    FRAMES:'frames',
+                        FRAME:'frame',
+                            ACTIONS:'actions',
+                                ACTOR:'actor',
+                                    VALUE:'value',
+                                TYPE:'type',
+                                    CAMERA      : 'camera',
+                                    BACKGROUND  : 'background',
+                                    DIALOG_BOX  : 'dialogBox',
+                                DATA:'data',
+                                ACTION:'action',
+                                    SHAKE:'shake',
+                                    ZOOM :'zoom',
+                                    ANIMATE:'animate',
+                                    JUMP:'jump',
+                                    CHANGE:'change',
+                                    POSTURE:'posture',
+                            LINES:'lines',
+                                TEXT:"text"
 
 };
 

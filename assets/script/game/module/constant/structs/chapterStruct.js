@@ -10,59 +10,56 @@ var ChapterStruct = cc.Class({
 
     properties: {
         //private
-        _attrs:Object,
+        _id:cc.String,
         _parts:Object,
         _index:cc.Integer,
         //public
         gId:{
             /**@return {string} */
             get: function(){
-                if(this._attrs['id']){
-                    return this._attrs.id;
-                }
-                return null;
+                return this._id;
             }
         }
     },
 
     ctor: function(){
+        this._id    = "";
         this._parts = {};
-        this._attrs = {};
         this._index = 0;
     },
     /**
-     * analyse data from XMLDocument
-     * @param [xdom]{XMLDocument}
+     * analyse data from Object
+     * @param [jsonObj]{Object}
      */
-    deserialize : function(xdom){
+    deserialize : function(jsonObj){
 
-        var chapterDom = gameDataUtil.getFirstElementByName(xdom, GameString.CHAPTER);
-        if(!chapterDom){
-            cc.warn('[Null] ' + GameString.CHAPTER + ' NOT EXIST in xml.')
+        var chapterJson = jsonObj[GameString.CHAPTER];
+
+        if(!chapterJson){
+            cc.warn('[Null] ' + GameString.CHAPTER + ' NOT EXIST in json.')
             return null;
         }
 
-        gameDataUtil.addPropertiesFromDom(this._attrs, chapterDom);
-        
-        var partsDom = gameDataUtil.getFirstElementByName(chapterDom, GameString.PARTS);
+        this._id = chapterJson.id;
 
-        if(!partsDom){
+        var partsJson = chapterJson[GameString.PARTS];
+        
+        if(!partsJson){
             return null;
         }
 
         // serialize parts
-        var partNodeList = partsDom.getElementsByTagName(GameString.PART);
-        for(var i = 0; i < partNodeList.length; i++){
+        for(var i = 0; i < partsJson.length; i++){
             
-            var partDom = partNodeList[i];
+            var partJson = partsJson[i];
 
-            if(!partDom){
+            if(!partJson){
                 return;
             }
             
             var part = new PartStruct();
             
-            part.deserialize(partDom);
+            part.deserialize(partJson);
 
             this._parts[part.gId] = part;
         }
@@ -70,8 +67,8 @@ var ChapterStruct = cc.Class({
         return this;
     },
     /**
-     * generate XMLDocument
-     * @return {XMLDocument}
+     * generate Object
+     * @return {Object}
      */
     serialize: function(){
         return null;

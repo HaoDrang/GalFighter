@@ -8,17 +8,14 @@ var LinesStruct = require('linesStruct');
  */
 var FrameStruct = cc.Class({
     properties: {
-        _attrs : Object,
+        _id : cc.String,
         _actions : Array,
         _lines : Object,
         //public
         gId:{
             /**@return {string} */
             get: function(){
-                if(this._attrs['id']){
-                    return this._attrs.id;
-                }
-                return null;
+                return this._id;
             }
         },
 
@@ -46,54 +43,48 @@ var FrameStruct = cc.Class({
     },
 
     ctor: function(){
-        this._attrs = {};
+        this._id = "";
         this._lines = {};
         this._actions = [];
     },
     /**
-     * analyse data from XMLDocument
-     * @param [xdom]{XMLDocument}
+     * analyse data from Object
+     * @param [jsonObj]{Object}
      */
-    deserialize : function(xdom){
+    deserialize : function(jsonObj){
 
-        gameDataUtil.addPropertiesFromDom(this._attrs, xdom);
+        this._id = jsonObj.id;
 
-        var actionsDom = gameDataUtil.getFirstElementByName(xdom, GameString.ACTIONS);
+        var actionsJson = jsonObj[GameString.ACTIONS];
 
-        if(!actionsDom){
+        if(!actionsJson){
             return;
         }
 
-        var actionsNodeList = actionsDom.getElementsByTagName(GameString.ACTION);
+        for(var i = 0; i < actionsJson.length; i++){
 
-        if(!actionsNodeList){
-            return;
-        }
+            var actionJson = actionsJson[i];
 
-        for(var i = 0; i < actionsNodeList.length; i++){
-
-            var actionDom = actionsNodeList[i];
-
-            if(!actionDom){
+            if(!actionJson){
                 continue;
             }
 
             var action = new ActionStruct();
 
-            action.deserialize(actionDom);
+            action.deserialize(actionJson);
 
             this._actions.push(action);
         }
 
-        var linesDom = gameDataUtil.getFirstElementByName(xdom, GameString.LINES);
+        var linesJson = jsonObj[GameString.LINES];
         
         this._lines = new LinesStruct();
 
-        this._lines.deserialize(linesDom);
+        this._lines.deserialize(linesJson);
     },
     /**
-     * generate XMLDocument
-     * @return {XMLDocument}
+     * generate Object
+     * @return {Object}
      */
     serialize: function(){
         return null;

@@ -7,7 +7,7 @@ var gameDataUtil = require('gameDataUtil');
 var LinesStruct = cc.Class({
     properties: {
         //private
-        _attrs : Object,
+        _id : Object,
         _content : cc.String,
 
         //public
@@ -19,21 +19,20 @@ var LinesStruct = cc.Class({
     },
 
     ctor:function(){
-        this._attrs = {};
+        this._id = "";
         this._content = "";
     },
     /**
-     * analyse data from XMLDocument
-     * @param [xdom]{XMLDocument}
+     * analyse data from Object
+     * @param [jsonObj]{Object}
      */
-    deserialize : function(xdom){
-        gameDataUtil.addPropertiesFromDom(this._attrs, xdom);
+    deserialize : function(jsonObj){
 
-        this._content = gameDataUtil.convertLines(xdom.textContent);
+        this._content = jsonObj[GameString.TEXT];
     },
     /**
      * generate xml string
-     * @return {XMLDocument}
+     * @return {Object}
      */
     serialize: function(){
         return null;

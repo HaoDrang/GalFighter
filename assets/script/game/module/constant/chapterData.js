@@ -1,5 +1,4 @@
 var ChapterStruct = require('chapterStruct');
-var TPDomParser = require('domParser');
 
 var ChapterData = cc.Class({
 
@@ -18,13 +17,11 @@ var ChapterData = cc.Class({
     },
 
     /**
-     * initialize chapter with chapter xml string
-     * @param [xmlString]{string}
+     * initialize chapter with chapter  string
+     * @param [jsonString]{object}
      */
-    initialize: function(xmlString){
-        var parser = new TPDomParser();
-        var dom = parser.parseFromString(xmlString);
-        this._chapterData.deserialize(dom);
+    initialize: function(jsonObject){
+        this._chapterData.deserialize(jsonObject);
     },
 
     /**

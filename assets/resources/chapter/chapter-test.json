@@ -1,0 +1,36 @@
+{
+	"chapter":{
+		"id":"chapter-1",
+		"parts":[
+			{
+				"id" : "part-1",
+				"frames":[
+					{
+						"id" : "frame-1",
+						"actions":[
+							{
+								"id":"action-1",
+								"actor":{ "value":"testActor1" },
+								"type" :"animate",
+								"data":{ "value" : "shrug"}
+							},
+							{
+								"id":"action-2",
+								"actor":{ "value" : "testActor2"},
+								"type":"shake",
+								"data":{ "range" : 10, "duration":0.4}
+							}
+						],
+						"lines":{
+							"text":"[color=green][size=30]I'm green and 测试文字[/size][/color]"
+						}
+					},
+					{"id" : "frame-2"},
+					{"id" : "frame-3"}
+				]
+			},{
+				"id" : "part-2"
+			}
+		]
+	}
+}

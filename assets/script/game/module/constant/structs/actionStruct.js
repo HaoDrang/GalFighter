@@ -6,16 +6,13 @@ var GameString = require('gameString');
  */
 var ActionStruct = cc.Class({
     properties: {
-        _attrs : Object,
+        _id : Object,
         _data : Object,
         //public
         gId:{
             /**@return {string} */
             get: function(){
-                if(this._attrs['id']){
-                    return this._attrs.id;
-                }
-                return null;
+                return this._id;
             }
         },
 
@@ -27,29 +24,26 @@ var ActionStruct = cc.Class({
     },
 
     ctor : function(){
-        this._attrs = {};
+        this._id = "";
         this._data = {};
     },
     /**
-     * analyse data from XMLDocument
-     * @param [xdom]{XMLDocument}
+     * analyse data from json
+     * @param [jsonObj]{Object}
      */
-    deserialize : function(xdom){
-        gameDataUtil.addPropertiesFromDom(this._attrs, xdom);
+    deserialize : function(jsonObj){
 
-        var actorName = gameDataUtil.getFirstElementByName(xdom, GameString.ACTOR).textContent;
+        this._id = jsonObj.id;
 
-        var actorType = gameDataUtil.getFirstElementByName(xdom, GameString.TYPE).textContent;
+        var actor = jsonObj[GameString.ACTOR];
 
-        var actorData = gameDataUtil.getFirstElementByName(xdom, actorType);
+        var actionType = jsonObj[GameString.TYPE];
 
-        gameDataUtil.addPropertiesFromDom(this._data, actorData);
-
-        this._data['value'] = actorData.textContent;
+        var actionData = jsonObj[GameString.DATA];
     },
     /**
-     * generate XMLDocument
-     * @return {XMLDocument}
+     * generate Object
+     * @return {Object}
      */
     serialize: function(){
         return null;
