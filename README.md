@@ -5,6 +5,7 @@ PROGRESSING
 TODO:
 
 [Show Scene]
+
 1. Show Lines [DONE]
 2. Show Actor
 3. Rich Text
