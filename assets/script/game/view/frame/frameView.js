@@ -4,7 +4,7 @@ cc.Class({
     extends: cc.Component,
 
     properties:()=>({
-
+        actorTemplate:cc.Prefab,
         actorRoot:cc.Node,
         linesView:require('linesView'),
         background:cc.Sprite
