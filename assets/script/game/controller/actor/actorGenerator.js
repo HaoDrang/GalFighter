@@ -1,26 +1,63 @@
-cc.Class({
-    extends: cc.Component,
+var SpawningPool = require('spawningPool');
+var ActorViewStr = 'actorRender';
 
+/*************************************
+ * Generate a new actor
+ *************************************/
+
+var ActorGenerator = cc.Class({
     properties: {
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
+        _pool:SpawningPool,
+        _infoMap:Object,
+        /**Resources Map 
+         * {
+         *      actorKey1:{
+         *          (if upgrade to animation action, use cc.Prefab) 
+         *          actionKey1:cc.SpriteFrame 
+         *          actionKey1:cc.SpriteFrame 
+         *      }
+         *      actorKey2:{
+         *          actionKey2:cc.SpriteFrame 
+         *          actionKey2:cc.SpriteFrame 
+         *      }
+         * }
+         */
+        _resMap:Object,
+
+        actorTemplate:cc.Prefab
     },
+    /**
+     * @param [infos]{Object} infos of initialize
+     * @param [res]{Object} serialized resources 
+     */
+    initialize:function(infos, res){
+        this._infoMap = infos;
+        this._resMap = res;
 
-    // use this for initialization
-    onLoad: function () {
-
+        this._pool = new SpawningPool();
+        this._pool.initialize(actorTemplate, ActorViewStr);
     },
+    /**
+     * create a new actor
+     */
+    generate:function(actorKey){
+        var actorInfo = this._infoMap[actorKey];
 
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
+        if(!actorInfo){
+            cc.warn("[WARNING] key do not exist in map. Key:" + actorKey);
+            return;
+        }
 
-    // },
+        var actor = this._pool.spawn();
+
+        var script = actor.getComponent(ActorViewStr);
+        actor.initialize(actorInfo, this._resMap[actorKey]);
+
+        return actor;
+    }
 });
+
+
+
+module.exports = ActorGenerator;
+
